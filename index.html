@@ -18,6 +18,11 @@
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <style>
+    button {
+      font-size: 1.5rem;
+    }
+    </style>
 		<script>
       const runCode = ctx => {
         let n = ctx;
@@ -25,11 +30,11 @@
           const code = n.querySelector('code');
           if (code) {
             eval(code.innerText);
-            break;
+            return;
           }
           n = n.parentElement;
         }
-        ctx.parentElement.parentElement.querySelector('code')
+        alert('Ops! Bug not found!');
       }
 		</script>
 	</head>
@@ -49,7 +54,7 @@
 					<h2>Breakpoints</h2>
 					<ul>
 						<li>debugger keyword</li>
-						<li>Add breakpoint - menu/sidebar</li>
+						<li>Add breakpoint - menu/line number</li>
 						<li>Conditional</li>
 						<li>Exception</li>
 						<li>XHR</li>
@@ -60,7 +65,8 @@
 				</section>
 
 				<section>
-					<h2></h2>
+					<h2>debugger keyword</h2>
+          <p><button onClick="runCode(this)">Execute bug</button></p>
 					<pre><code class="hljs" data-trim>
 (() => {
   const date = new Date();
@@ -75,8 +81,26 @@
   }
 })();
 					</code></pre>
-          <p><button onClick="runCode(this)">Run</button></p>
+          <p>Press F12; The 'debugger' breakpoint pauses the execution when evaluated; While paused, try setting a breakpoint by clicking on it's line number.</p>
 				</section>
+
+        <section data-background="gifs/debugger-linebreakpoint.gif">
+				</section>
+
+
+				<section>
+					<h2>DOM</h2>
+					<pre><code class="hljs" data-trim>
+(() => {
+  console.log(this);
+})();
+					</code></pre>
+          <p><button onClick="runCode(this)">Execute bug</button></p>
+					<aside class="notes">
+						Pauses the code when the keyword is executed.
+					</aside>
+				</section>
+
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
