@@ -18,6 +18,20 @@
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<script>
+      const runCode = ctx => {
+        let n = ctx;
+        while (n) {
+          const code = n.querySelector('code');
+          if (code) {
+            eval(code.innerText);
+            break;
+          }
+          n = n.parentElement;
+        }
+        ctx.parentElement.parentElement.querySelector('code')
+      }
+		</script>
 	</head>
 
 	<body>
@@ -32,24 +46,36 @@
 				</section>
 
 				<section>
-					<h2>Pretty Code</h2>
+					<h2>Breakpoints</h2>
+					<ul>
+						<li>debugger keyword</li>
+						<li>Add breakpoint - menu/sidebar</li>
+						<li>Conditional</li>
+						<li>Exception</li>
+						<li>XHR</li>
+						<li>Event Listener</li>
+						<li>debug keyword</li>
+						<li>DOM</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2></h2>
 					<pre><code class="hljs" data-trim>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
+(() => {
+  const date = new Date();
+  if(date.getFullYear() >= 1992) {
+      if(date.getMonth() >= 9) {
+          if(date.getDate() <= 13) {
+            console.log(date.toISOString());
+          }
+      } else {
+          debugger;
       }
-    }
   }
-}
+})();
 					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+          <p><button onClick="runCode(this)">Run</button></p>
 				</section>
 			</div>
 		</div>
