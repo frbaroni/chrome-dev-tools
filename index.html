@@ -15,6 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/notifications.css">
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,6 +42,11 @@
         }
         alert('Ops! Bug not found!');
       }
+
+      let notifier = undefined;
+      setTimeout(() => {
+        notifier = new AWN({});
+      }, 1000);
 		</script>
 	</head>
 
@@ -51,16 +57,16 @@
 					<h1>Chrome Dev Tools</h1>
 					<h3>tips and tricks</h3>
 					<p>
-						<small>Created by <a href="https://baroni.tech/">Fernando Baroni</a></small>
+            <small>Created by <a href="https://baroni.tech/">Fernando Baroni</a> <a href="mailto:fernando.baroni@gft.com">(fernando.baroni@gft.com)</a></small>
 					</p>
 				</section>
 
 				<section>
 					<h2>Breakpoints</h2>
 					<ul>
-						<li>* debugger keyword</li>
-						<li>* Add breakpoint - menu/line number</li>
-						<li>* Exception</li>
+						<li>debugger keyword</li>
+						<li>Add breakpoint - menu/line number</li>
+						<li>Exception</li>
 						<li>Conditional</li>
 						<li>XHR</li>
 						<li>Event Listener</li>
@@ -74,19 +80,19 @@
           <section>
             <h2>debugger keyword</h2>
             <p><button onClick="runCode(this)">Execute bug</button></p>
-            <pre><code class="hljs" data-trim>
-  (() => {
-    const date = new Date();
-    if(date.getFullYear() >= 1992) {
-        if(date.getMonth() >= 9) {
-            if(date.getDate() <= 13) {
-              console.log(date.toISOString());
-            }
-        } else {
-            debugger;
-        }
-    }
-  })();
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const date = new Date();
+  if(date.getFullYear() >= 1992) {
+      if(date.getMonth() >= 9) {
+          if(date.getDate() <= 13) {
+            console.log(date.toISOString());
+          }
+      } else {
+          debugger;
+      }
+  }
+})();
             </code></pre>
             <p>Press F12; The 'debugger' breakpoint pauses the execution when evaluated; While paused, try setting a breakpoint by clicking on it's line number.</p>
           </section>
@@ -99,14 +105,14 @@
           <section>
             <h2>Exception</h2>
             <p><button onClick="runCode(this)">Execute bug</button></p>
-            <pre><code class="hljs" data-trim>
-  (() => {
-    let c = 1;
-    console.log('Something');
-    c++; // rocks
-    do_something_fun();
-    console.info('...useful');
-  })();
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  let c = 1;
+  console.log('Something');
+  c++; // rocks
+  do_something_fun();
+  console.info('...useful');
+})();
             </code></pre>
             <p>Enable the 'Exception' breakpoint by toggling </p>
             <img src="gifs/exception-breakpoint.gif"/>
@@ -119,19 +125,60 @@
         <section class="stack present">
           <section>
             <h2>Conditional</h2>
-          </section>
-				</section>
-				<section>
-					<h2>How to add breakpoint to loops?</h2>
-					<pre><code class="hljs" data-trim>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
 (() => {
-  console.log(this);
+  for(let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const v = Math.ceil(Math.abs((i * i) / (i - 5)));
+      const text = 'hello conditionals ' + v;
+      text.length < 22
+        ? notifier.success(text)
+        : notifier.warning(text);
+    }, i * 1200);
+  }
 })();
-					</code></pre>
-          <p><button onClick="runCode(this)">Execute bug</button></p>
-					<aside class="notes">
-						Pauses the code when the keyword is executed.
-					</aside>
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Dummy conditional</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  for(let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const v = Math.ceil(Math.abs((i * i) / (i - 5)));
+      const text = 'hello conditionals ' + v;
+      if(text.length > 22) debugger;
+      text.length < 22
+        ? notifier.success(text)
+        : notifier.warning(text);
+    }, i * 1200);
+  }
+})();
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Conditional</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  for(let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const v = Math.ceil(Math.abs((i * i) / (i - 5)));
+      const text = 'hello conditionals ' + v;
+      text.length < 22
+        ? notifier.success(text)
+        : notifier.warning(text);
+    }, i * 1200);
+  }
+  debugger;
+})();
+            </code></pre>
+          </section>
+
 				</section>
 
 			</div>
@@ -153,7 +200,8 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/search/search.js', async: true },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'js/notifications.var.js' }
 				]
 			});
 		</script>
