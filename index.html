@@ -22,6 +22,11 @@
     button {
       font-size: 1.5rem;
     }
+
+    .reveal p {
+      line-height: 1.1;
+      font-size: 0.8em;
+    }
     </style>
 		<script>
       const runCode = ctx => {
@@ -53,43 +58,71 @@
 				<section>
 					<h2>Breakpoints</h2>
 					<ul>
-						<li>debugger keyword</li>
-						<li>Add breakpoint - menu/line number</li>
+						<li>* debugger keyword</li>
+						<li>* Add breakpoint - menu/line number</li>
+						<li>* Exception</li>
 						<li>Conditional</li>
-						<li>Exception</li>
 						<li>XHR</li>
 						<li>Event Listener</li>
 						<li>debug keyword</li>
 						<li>DOM</li>
+						<li>Blacklist</li>
 					</ul>
 				</section>
 
-				<section>
-					<h2>debugger keyword</h2>
-          <p><button onClick="runCode(this)">Execute bug</button></p>
-					<pre><code class="hljs" data-trim>
-(() => {
-  const date = new Date();
-  if(date.getFullYear() >= 1992) {
-      if(date.getMonth() >= 9) {
-          if(date.getDate() <= 13) {
-            console.log(date.toISOString());
-          }
-      } else {
-          debugger;
-      }
-  }
-})();
-					</code></pre>
-          <p>Press F12; The 'debugger' breakpoint pauses the execution when evaluated; While paused, try setting a breakpoint by clicking on it's line number.</p>
+        <section class="stack present">
+          <section>
+            <h2>debugger keyword</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre><code class="hljs" data-trim>
+  (() => {
+    const date = new Date();
+    if(date.getFullYear() >= 1992) {
+        if(date.getMonth() >= 9) {
+            if(date.getDate() <= 13) {
+              console.log(date.toISOString());
+            }
+        } else {
+            debugger;
+        }
+    }
+  })();
+            </code></pre>
+            <p>Press F12; The 'debugger' breakpoint pauses the execution when evaluated; While paused, try setting a breakpoint by clicking on it's line number.</p>
+          </section>
+
+          <section data-background="gifs/debugger-linebreakpoint.gif">
+          </section>
 				</section>
 
-        <section data-background="gifs/debugger-linebreakpoint.gif">
+        <section class="stack present">
+          <section>
+            <h2>Exception</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre><code class="hljs" data-trim>
+  (() => {
+    let c = 1;
+    console.log('Something');
+    c++; // rocks
+    do_something_fun();
+    console.info('...useful');
+  })();
+            </code></pre>
+            <p>Enable the 'Exception' breakpoint by toggling </p>
+            <img src="gifs/exception-breakpoint.gif"/>
+          </section>
+
+          <section data-background="gifs/exception-breakpoint-usage.gif">
+          </section>
 				</section>
 
-
+        <section class="stack present">
+          <section>
+            <h2>Conditional</h2>
+          </section>
+				</section>
 				<section>
-					<h2>DOM</h2>
+					<h2>How to add breakpoint to loops?</h2>
 					<pre><code class="hljs" data-trim>
 (() => {
   console.log(this);
