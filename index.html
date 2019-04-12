@@ -150,7 +150,7 @@
     setTimeout(() => {
       const v = Math.ceil(Math.abs((i * i) / (i - 5)));
       const text = 'hello conditionals ' + v;
-      if(text.length > 22) debugger;
+      if(text.length > 22) debugger; // I won!
       text.length < 22
         ? notifier.success(text)
         : notifier.warning(text);
@@ -174,11 +174,13 @@
         : notifier.warning(text);
     }, i * 1200);
   }
-  debugger;
+  debugger; // Just to we break into the VM
 })();
             </code></pre>
           </section>
 
+          <section data-background="gifs/conditional-breakpoint-1.gif">
+          </section>
 				</section>
 
 			</div>
