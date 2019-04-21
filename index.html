@@ -19,6 +19,8 @@
 		<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<link href="tabulator/dist/css/tabulator.min.css" rel="stylesheet">
     <style>
     button {
       font-size: 1.5rem;
@@ -28,6 +30,11 @@
       line-height: 1.1;
       font-size: 0.8em;
     }
+
+		#conditional-table {
+			position: relative;
+			top: -5em;
+		}
     </style>
 		<script>
       const runCode = ctx => {
@@ -68,6 +75,7 @@
 						<li>Add breakpoint - menu/line number</li>
 						<li>Exception</li>
 						<li>Conditional</li>
+						<li>Conditional 'Logging'</li>
 						<li>XHR</li>
 						<li>Event Listener</li>
 						<li>debug keyword</li>
@@ -181,6 +189,60 @@
 
           <section data-background="gifs/conditional-breakpoint-1.gif">
           </section>
+
+          <section>
+            <h2>Cooler Conditional</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => { debugger;
+const scoreFormatter = cell => {
+	const r = cell.getRow().getData();
+	return r.base + r.project; }
+const table = new Tabulator('#conditional-table', {
+	layout: 'fitColumns',
+	columns:[
+		{title: 'Name', field: 'name'},
+		{title: 'Base', field: 'base'},
+		{title: 'Project', field: 'project'},
+		{title: 'Score', field: 'score',
+			formatter: scoreFormatter}],
+	data: [
+		{name: 'Fernando', base: 4.2, project: 3.8},
+		{name: 'Yuna', base: 4.2, project: 4.8},
+			// Yuna - the most beautiful mage
+		{name: 'Tidus', base: '2.9', project: 2.2},
+	]
+});
+})();
+            </code></pre>
+						<div id="conditional-table"></div>
+          </section>
+
+          <section data-background="gifs/conditional-breakpoint-2.gif">
+          </section>
+
+
+          <section>
+            <h2>Conditional 'logging'</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => { debugger;
+	const saved = [];
+	for(let i = 0; i < 10; i++) {
+		const o = { i, e: i * 2 };
+		if (o.i < 5) {
+			saved.push(o);
+		}
+	}
+})();
+            </code></pre>
+          </section>
+
+          <section data-background="gifs/conditional-logging.gif">
+          </section>
+
+          <section data-background="gifs/conditional-timing.gif">
+          </section>
 				</section>
 
 			</div>
@@ -203,7 +265,8 @@
 					{ src: 'plugin/search/search.js', async: true },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'js/notifications.var.js' }
+					{ src: 'js/notifications.var.js' },
+					{ src: 'tabulator/dist/js/tabulator.min.js' },
 				]
 			});
 		</script>
