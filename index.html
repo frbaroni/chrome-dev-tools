@@ -259,6 +259,60 @@ const table = new Tabulator('#conditional-table', {
 					</ul>
 				</section>
 
+        <section class="stack present">
+          <section>
+            <h2>Lambda Breakpoints</h2>
+						<p>Functional Programming Paradigm side effect: you have many lambdas, small functions, filters, mappers, accumulators... How to breakpoint that specific lambda?</p>
+          </section>
+
+          <section>
+            <h2>Lambda Breakpoints</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+	debugger;
+	const d = [
+		{ name: 'Fernando', lastName: 'Baroni',
+			age: 26 },
+		{ name: 'Chocolate', lastName: 'Baroni',
+			age: 5 },
+		{ name: 'Chuck', lastName: 'Norris',
+			age: 79 },
+	];
+	console.log(d.filter(u => u.age > 10)
+		.map(u => u.name + ' ' + u.lastName)
+		.join(''));
+})();
+            </code></pre>
+          </section>
+
+          <section data-background="gifs/lambda-breakpoint.gif">
+          </section>
+				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>XHR Breakpoints</h2>
+						<p>Useful to break when a service is 'fetched'.</p>
+          </section>
+
+          <section>
+            <h2>XHR Breakpoints</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+	axios.get('/api/users');
+	axios.get('/api/users/fernando-baroni');
+	axios.post('/api/cart', {a: 1});
+	axios.delete('/api/data/2');
+})();
+            </code></pre>
+          </section>
+
+          <section data-background="gifs/xhr-breakpoint.gif">
+          </section>
+				</section>
+
 				<section>
 					<h2>Performance, memory and audits</h2>
 					<ul>
@@ -276,6 +330,7 @@ const table = new Tabulator('#conditional-table', {
 						<li>Selector testing</li>
 						<li>copy()</li>
 						<li>Prettify minified code</li>
+						<li>Expression logging - tip: always log objects!</li>
 					</ul>
 				</section>
 
@@ -313,6 +368,7 @@ const table = new Tabulator('#conditional-table', {
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'js/notifications.var.js' },
 					{ src: 'tabulator/dist/js/tabulator.min.js' },
+					{ src: 'axios/dist/axios.min.js' },
 				]
 			});
 		</script>
