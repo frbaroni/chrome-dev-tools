@@ -35,6 +35,28 @@
 			position: relative;
 			top: -5em;
 		}
+
+    #dom-breakpoints, #dom-breakpoints-2 {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    #dom-breakpoints > div, #dom-breakpoints-2 div {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+
+    #dom-breakpoints-2 div {
+      background-color: pink;
+    }
+
+    #dom-breakpoints-3 {
+      margin: auto;
+      background-color: gold;
+      width: 400px;
+      height: 100px;
+    }
     </style>
 		<script>
       const runCode = ctx => {
@@ -71,14 +93,35 @@
 				<section>
 					<h2>Breakpoints</h2>
 					<ul>
+						<li>Add breakpoint menu/line number</li>
 						<li>debugger keyword</li>
-						<li>Add breakpoint - menu/line number</li>
 						<li>Exception</li>
 						<li>Dummy Conditional</li>
 						<li>Conditional</li>
 						<li>Conditional expression tricks</li>
 					</ul>
 				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>Add breakpoint menu</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+	debugger;
+	console.log('a');
+	console.info('b');
+	console.warn('c');
+	console.error('d');
+})();
+            </code></pre>
+            <p>Press F12; While paused, try setting a breakpoint by clicking on it's line number.</p>
+          </section>
+
+          <section data-background="gifs/add-breakpoint-menu.gif">
+          </section>
+				</section>
+
 
         <section class="stack present">
           <section>
@@ -98,7 +141,7 @@
   }
 })();
             </code></pre>
-            <p>Press F12; The 'debugger' breakpoint pauses the execution when evaluated; While paused, try setting a breakpoint by clicking on it's line number.</p>
+            <p>Press F12; The 'debugger' breakpoint pauses the execution when evaluated.</p>
           </section>
 
           <section data-background="gifs/debugger-linebreakpoint.gif">
@@ -252,10 +295,7 @@ const table = new Tabulator('#conditional-table', {
 					<ul>
 						<li>Lambdas</li>
 						<li>XHR</li>
-						<li>Event Listener</li>
-						<li>debug keyword</li>
 						<li>DOM</li>
-						<li>Blacklist</li>
 					</ul>
 				</section>
 
@@ -313,6 +353,62 @@ const table = new Tabulator('#conditional-table', {
           </section>
 				</section>
 
+        <section class="stack present">
+          <section>
+            <h2>DOM Breakpoints</h2>
+						<p>DOM modifications, subtree and attributes tracking</p>
+          </section>
+
+          <section>
+            <h2>DOM Breakpoints - Subtree</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const div = document.createElement('div');
+  const divs = document.getElementById('dom-breakpoints');
+  divs.appendChild(div);
+})();
+            </code></pre>
+            <div id="dom-breakpoints">
+              <div> </div>
+              <div> </div>
+              <div> </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>DOM Breakpoints - Node Removal</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const divs = document.getElementById('dom-breakpoints-2');
+  divs.removeChild(divs.children[0]);
+})();
+            </code></pre>
+            <div id="dom-breakpoints-2">
+              <div> </div>
+              <div> </div>
+              <div> </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>DOM Breakpoints - Attributes</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const color = Math.floor(Math.random()*16777215).toString(16);
+  const div = document.getElementById('dom-breakpoints-3');
+  div.style.backgroundColor = '#' + color;
+})();
+            </code></pre>
+            <div id="dom-breakpoints-3">
+            </div>
+          </section>
+
+				</section>
+
+
 				<section>
 					<h2>Performance, memory and audits</h2>
 					<ul>
@@ -337,6 +433,7 @@ const table = new Tabulator('#conditional-table', {
 				<section>
 					<h2>Some more</h2>
 					<ul>
+						<li>Blacklist scripts</li>
 						<li>Console last evaluated value</li>
 						<li>Console reference elements in DOM</li>
 						<li>Where my CSS was defined?</li>
