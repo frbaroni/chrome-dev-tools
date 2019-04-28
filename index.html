@@ -57,6 +57,21 @@
       width: 400px;
       height: 100px;
     }
+
+    #profiler-1 {
+      position: relative;
+      margin: auto;
+      background-color: #696969;
+      width: 600px;
+      height: 125px;
+    }
+
+    #profiler-1 div {
+      position: absolute;
+      border-radius: 2px;
+      width: 10px;
+      height: 10px;
+    }
     </style>
 		<script>
       const runCode = ctx => {
@@ -76,6 +91,11 @@
       setTimeout(() => {
         notifier = new AWN({});
       }, 1000);
+
+      const randomColor = () => {
+        const color = Math.floor(Math.random()*16777215).toString(16);
+        return '#' + color;
+      }
 		</script>
 	</head>
 
@@ -397,15 +417,13 @@ const table = new Tabulator('#conditional-table', {
             <p><button onClick="runCode(this)">Execute bug</button></p>
             <pre class="javascript"><code class="hljs" data-trim>
 (() => {
-  const color = Math.floor(Math.random()*16777215).toString(16);
   const div = document.getElementById('dom-breakpoints-3');
-  div.style.backgroundColor = '#' + color;
+  div.style.backgroundColor = randomColor();
 })();
             </code></pre>
             <div id="dom-breakpoints-3">
             </div>
           </section>
-
 				</section>
 
 
@@ -417,6 +435,74 @@ const table = new Tabulator('#conditional-table', {
 						<li>Audits/Lighthouse</li>
 					</ul>
 				</section>
+
+
+        <section class="stack present">
+          <section>
+            <h2>Performance Profiler</h2>
+						<p>Analyze the code performance and time to complete operations</p>
+          </section>
+
+          <section>
+            <h2>Performance Profiler</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const divs = document.getElementById('profiler-1');
+  while (divs.firstChild) divs.removeChild(divs.firstChild);
+  const w = 590; const h = 115;
+  for (let i = 0; i < 1000; i++) {
+    const div = document.createElement('div');
+    div.style.backgroundColor = randomColor();
+    div.style.left = Math.round(Math.random() * w) + 'px';
+    div.style.top = Math.round(Math.random() * h) + 'px';
+    divs.appendChild(div);
+  }
+})();
+            </code></pre>
+            <div id="profiler-1">
+            </div>
+          </section>
+				</section>
+
+
+        <section class="stack present">
+          <section>
+            <h2>Memory Tracker</h2>
+						<p>Find memory leaks and analyze app memory usage</p>
+          </section>
+
+          <section>
+            <h2>Visualize memory usage</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  console.log('no code needed');
+})();
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Tracking memory leaks</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const mem = [];
+  for (let i = 0; i < 100; i++) {
+    mem.push({
+      i,
+      e: i * i,
+      f: i * i * i
+    });
+  }
+  if (!window.mem) window.mem = [];
+  window.mem.push(mem);
+})();
+            </code></pre>
+          </section>
+				</section>
+
+
 
 				<section>
 					<h2>Other tricks</h2>
