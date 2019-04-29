@@ -669,17 +669,16 @@ const table = new Tabulator('#conditional-table', {
 				</section>
 
         <section class="stack present">
-				<section>
-					<h2>Some more</h2>
-					<ul>
-						<li>Blacklist scripts</li>
-						<li>Console elements and last evaluated value</li>
-						<li>Where my CSS was defined?</li>
-						<li>Replay requests</li>
-						<li>Replay OPTIONS requests</li>
-						<li>Copy requests as cURL</li>
-					</ul>
-				</section>
+          <section>
+            <h2>Some more</h2>
+            <ul>
+              <li>Blacklist scripts</li>
+              <li>Console elements and last evaluated value</li>
+              <li>Where my CSS was defined?</li>
+              <li>Replay requests</li>
+              <li>Copy requests as cURL</li>
+            </ul>
+          </section>
 
           <section>
             <h2>Blacklist Scripts</h2>
@@ -687,14 +686,46 @@ const table = new Tabulator('#conditional-table', {
             <p><button onClick="runCode(this)">Execute bug</button></p>
             <pre class="javascript"><code class="hljs" data-trim>
 (() => { debugger;
-  console.log('Step (F11) into and skip notifier code');
-  notifier.success('Hello World');
-  console.log('Step (F11) into and skip notifier code');
+  console.log('Step (F11) into and skip lodash code');
+  const odd = _.filter([1, 2, 3, 4, 5], n => n % 2 == 0);
+  console.log('Step (F11) into and skip lodash code');
 })();
             </code></pre>
           </section>
 
-          <section data-background="gifs/tooltip-debugging.gif">
+          <section>
+            <h2>Console elements and last evaluated value</h2>
+            <p>Pseudo variables</p>
+            <p>$_ previous evaluated value</p>
+            <p>$0 selected DOM element</p>
+          </section>
+
+          <section>
+            <h2>Where my CSS was defined?</h2>
+            <p>Find where my CSS was defined.</p>
+          </section>
+
+          <section>
+            <h2>Replay requests</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+	axios.get('/api/users/fernando-baroni');
+})();
+            </code></pre>
+            <p>Notice: Pre-Flight/CORS OPTIONS requests</p>
+            <p>Repeat the OPTIONS requests instead of the POST/PUT/DELETE</p>
+          </section>
+
+          <section>
+            <h2>Copy as CURL</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+	axios.get('/api/users/fernando-baroni');
+})();
+            </code></pre>
+            <p>Reproducible XHR requests - copy as CURL</p>
           </section>
 				</section>
 
@@ -722,6 +753,7 @@ const table = new Tabulator('#conditional-table', {
 					{ src: 'js/notifications.var.js' },
 					{ src: 'tabulator/dist/js/tabulator.min.js' },
 					{ src: 'axios/dist/axios.min.js' },
+					{ src: 'js/lodash.js' },
 				]
 			});
 		</script>
