@@ -62,15 +62,15 @@
       position: relative;
       margin: auto;
       background-color: #696969;
-      width: 600px;
-      height: 125px;
+      width: 900px;
+      height: 150px;
     }
 
     #profiler-1 div {
       position: absolute;
       border-radius: 2px;
-      width: 10px;
-      height: 10px;
+      width: 5px;
+      height: 5px;
     }
     </style>
 		<script>
@@ -106,8 +106,37 @@
 					<h1>Chrome Dev Tools</h1>
 					<h3>tips and tricks</h3>
 					<p>
-            <small>Created by <a href="https://baroni.tech/">Fernando Baroni</a> <a href="mailto:fernando.baroni@gft.com">(fernando.baroni@gft.com)</a></small>
+            <small>Created by <a href="https://baroni.tech/">Fernando Baroni</a> <a href="mailto:fernando@baroni.tech">(fernando@baroni.tech)</a></small>
 					</p>
+					<p>
+            <small>Available at <a href="https://baroni.tech/cdt">https://baroni.tech/cdt</a></small>
+					</p>
+				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>Harm Up - Console Tricks</h2>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => { const abc = 'hello'; const def = 'world';
+  console.clear();
+  // tip: encapsulate info in a object
+  console.log({ abc, def });
+  console.time(); console.groupCollapsed('My Group');
+  console.log('hello'); console.info('beautiful');
+  console.warn('world');
+  console.table([
+    {name: 'Fernando', position: 'absolute'},
+    {name: 'Yuna', position: 'relative'}
+  ]);
+  console.groupEnd('My Group'); console.timeEnd();
+  console.error('ouch');
+})();
+            </code></pre>
+          </section>
+
+          <section data-background="gifs/console-tricks.gif">
+          </section>
 				</section>
 
 				<section>
@@ -396,6 +425,9 @@ const table = new Tabulator('#conditional-table', {
             </div>
           </section>
 
+          <section data-background="gifs/dom-subtree-modifications.gif">
+          </section>
+
           <section>
             <h2>DOM Breakpoints - Node Removal</h2>
             <p><button onClick="runCode(this)">Execute bug</button></p>
@@ -409,7 +441,12 @@ const table = new Tabulator('#conditional-table', {
               <div> </div>
               <div> </div>
               <div> </div>
+              <div> </div>
+              <div> </div>
             </div>
+          </section>
+
+          <section data-background="gifs/dom-node-removal.gif">
           </section>
 
           <section>
@@ -423,6 +460,9 @@ const table = new Tabulator('#conditional-table', {
             </code></pre>
             <div id="dom-breakpoints-3">
             </div>
+          </section>
+
+          <section data-background="gifs/dom-attributes-modifications.gif">
           </section>
 				</section>
 
@@ -450,8 +490,8 @@ const table = new Tabulator('#conditional-table', {
 (() => {
   const divs = document.getElementById('profiler-1');
   while (divs.firstChild) divs.removeChild(divs.firstChild);
-  const w = 590; const h = 115;
-  for (let i = 0; i < 1000; i++) {
+  const w = 895; const h = 145;
+  for (let i = 0; i < 10000; i++) {
     const div = document.createElement('div');
     div.style.backgroundColor = randomColor();
     div.style.left = Math.round(Math.random() * w) + 'px';
@@ -462,6 +502,9 @@ const table = new Tabulator('#conditional-table', {
             </code></pre>
             <div id="profiler-1">
             </div>
+          </section>
+
+          <section data-background="gifs/profiler.gif">
           </section>
 				</section>
 
@@ -477,9 +520,15 @@ const table = new Tabulator('#conditional-table', {
             <p><button onClick="runCode(this)">Execute bug</button></p>
             <pre class="javascript"><code class="hljs" data-trim>
 (() => {
-  console.log('no code needed');
+  let s = '';
+  while (s.length < 1000000) s += 'hello world...';
+  if (!window.big_strings) window.big_strings = [];
+  window.big_string.push(s);
 })();
             </code></pre>
+          </section>
+
+          <section data-background="gifs/memory.gif">
           </section>
 
           <section>
@@ -500,8 +549,12 @@ const table = new Tabulator('#conditional-table', {
 })();
             </code></pre>
           </section>
-				</section>
 
+          <section>
+            <h2>Audits/Lighthouse</h2>
+            <p>PWAs for the win</p>
+          </section>
+				</section>
 
 
 				<section>
@@ -515,6 +568,45 @@ const table = new Tabulator('#conditional-table', {
 						<li>Expression logging - tip: always log objects!</li>
 					</ul>
 				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>Restarting Frames</h2>
+            <p>On Call Stack, we can restart function contexts</p>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => { debugger;
+  const a = n => {
+    const nn = n * n;
+    if (nn > 5) {
+      return b(n);
+    } else {
+      return c(n);
+    }
+  }
+  const b = console.info;
+  const c = console.warn;
+
+  a(10);
+})();
+            </code></pre>
+          </section>
+				</section>
+
+
+        <section class="stack present">
+          <section>
+            <h2>Tooltip Debugging</h2>
+            <p>Pause and manipulate tooltips DOM</p>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  notifier.success('Hello World');
+})();
+            </code></pre>
+          </section>
+				</section>
+
 
 				<section>
 					<h2>Some more</h2>
