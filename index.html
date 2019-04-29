@@ -72,6 +72,12 @@
       width: 5px;
       height: 5px;
     }
+
+    .edilio img {
+      border: 0 !important;
+      background-color: #FFFFFF00 !important;
+      box-shadow: none !important;
+    }
     </style>
 		<script>
       const runCode = ctx => {
@@ -550,9 +556,15 @@ const table = new Tabulator('#conditional-table', {
             </code></pre>
           </section>
 
+          <section data-background="gifs/memory-leaks.gif">
+          </section>
+
           <section>
             <h2>Audits/Lighthouse</h2>
             <p>PWAs for the win</p>
+          </section>
+
+          <section data-background="gifs/audits.gif">
           </section>
 				</section>
 
@@ -564,8 +576,7 @@ const table = new Tabulator('#conditional-table', {
 						<li>Tooltip debugging</li>
 						<li>Selector testing</li>
 						<li>copy()</li>
-						<li>Prettify minified code</li>
-						<li>Expression logging - tip: always log objects!</li>
+						<li>Prettify code</li>
 					</ul>
 				</section>
 
@@ -591,6 +602,9 @@ const table = new Tabulator('#conditional-table', {
 })();
             </code></pre>
           </section>
+
+          <section data-background="gifs/restart-frame.gif">
+          </section>
 				</section>
 
 
@@ -604,6 +618,53 @@ const table = new Tabulator('#conditional-table', {
   notifier.success('Hello World');
 })();
             </code></pre>
+          </section>
+
+          <section data-background="gifs/tooltip-debugging.gif">
+          </section>
+				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>Selector Testing</h2>
+            <p>Edilio o/</p>
+            <p>CTRl-F in DOM to search using XPATH/CSS queries</p>
+            <div class="edilio">
+                <span class="findme">find<span>
+                <img src="gifs/edilio.svg" />
+                me
+            </div>
+          </section>
+
+          <section data-background="gifs/selector-testing.gif">
+          </section>
+				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>copy()</h2>
+            <p>Copy-C an object</p>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => {
+  const o = ({ futurama: 'eh bom demais' });
+  debugger;
+  // copy(o)
+})();
+            </code></pre>
+          </section>
+
+          <section data-background="gifs/copy.gif">
+          </section>
+				</section>
+
+        <section class="stack present">
+          <section>
+            <h2>prettify code</h2>
+            <img src="gifs/prettify.png"/>
+          </section>
+
+          <section data-background="gifs/prettify.gif">
           </section>
 				</section>
 
