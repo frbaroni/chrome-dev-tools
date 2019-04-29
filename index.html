@@ -668,7 +668,7 @@ const table = new Tabulator('#conditional-table', {
           </section>
 				</section>
 
-
+        <section class="stack present">
 				<section>
 					<h2>Some more</h2>
 					<ul>
@@ -680,6 +680,24 @@ const table = new Tabulator('#conditional-table', {
 						<li>Copy requests as cURL</li>
 					</ul>
 				</section>
+
+          <section>
+            <h2>Blacklist Scripts</h2>
+            <p>Stop stepping into framework code</p>
+            <p><button onClick="runCode(this)">Execute bug</button></p>
+            <pre class="javascript"><code class="hljs" data-trim>
+(() => { debugger;
+  console.log('Step (F11) into and skip notifier code');
+  notifier.success('Hello World');
+  console.log('Step (F11) into and skip notifier code');
+})();
+            </code></pre>
+          </section>
+
+          <section data-background="gifs/tooltip-debugging.gif">
+          </section>
+				</section>
+
 
 			</div>
 		</div>
